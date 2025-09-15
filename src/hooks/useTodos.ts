@@ -12,4 +12,9 @@ export const useTodos = () => {
     }
     setTodos(prevTodos => [...prevTodos, newTodo])
   }
+
+  return {
+    todos,
+    addTodo
+  }
 }

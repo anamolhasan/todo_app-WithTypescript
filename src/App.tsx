@@ -1,17 +1,18 @@
 import { useState } from "react";
 import "./App.css";
 import type { TodoFormEvent } from "./types/todo";
+import { useTodos } from "./hooks/useTodos";
 
 function App() {
   const [newTodo, setNewTodo] = useState<string>('')
-
+  const {todos, addTodo} = useTodos()
   
   const handleSubmit = (e: TodoFormEvent) => {
     e.preventDefault()
 
     if(newTodo.trim()){
       // new todo
-      
+      addTodo(newTodo.trim())
     }
   }
   return (
@@ -35,7 +36,13 @@ function App() {
 
         {/* display todo items */}
         <div className="space-y-2">
-          Todo Items
+          {
+            todos.map(todo => (
+              <div key={todo.id}>
+                {todo.text}
+              </div>
+            ))
+          }
         </div>
       </div>
     </div>
